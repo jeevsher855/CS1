@@ -14,17 +14,18 @@ int main()
 {
     double height, dist_fall, g;
     int time, num = 0;
-    cout << "" << endl;
-    cout << "" << endl;
+
     cout << "Please input the time of fall in seconds" << endl;
     cin >> time;
     cout << "Please input the height of the bridge in meters" << endl;
     cin >> height;
+    cout << "Time Falling (seconds)" << setw(25) << "Distance Fallen (meters)" << endl;
+    cout << "***********************************************" << endl;
     while (num >= 0 && num <= time)
     {
         dist_fall = 0.5 * 9.8 * (num * num);
         cout << setprecision(1) << fixed << showpoint;
-        cout << num << setw(20) << dist_fall << endl;
+        cout << num << setw(25) << dist_fall << endl;
         num++;
         if (dist_fall > height)
         {
