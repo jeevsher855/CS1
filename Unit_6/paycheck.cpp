@@ -34,10 +34,6 @@ int main()
 
 	computePaycheck(payRate, hours, grossPay, netPay);
 
-	cout << "The gross pay is $" << grossPay << endl;
-
-	cout << "The net pay is $" << netPay << endl;
-
 	cout << "We hope you enjoyed this program" << endl;
 
 	return 0;
@@ -75,4 +71,7 @@ void computePaycheck(float rate, int time, float& gross, float& net)
 {
 	gross = rate * time;
 	net = gross - gross * 0.15;
+
+	cout << "The gross pay is $" << gross << endl;
+	cout << "The net pay is $" << net << endl;
 }
