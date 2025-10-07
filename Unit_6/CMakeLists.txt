@@ -3,4 +3,7 @@ project(Unit_6)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Unit_6 main.cpp)
+add_executable(Unit_6 main.cpp
+        swap.cpp
+        milestraveled.cpp
+        readgrades.cpp)
