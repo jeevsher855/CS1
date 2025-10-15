@@ -6,4 +6,6 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(Unit_6 main.cpp
         swap.cpp
         milestraveled.cpp
-        readgrades.cpp)
+        readgrades.cpp
+        ascii_table_function.cpp
+        mtokm.cpp)

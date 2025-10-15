@@ -2,7 +2,7 @@
 #include <iomanip>
 using namespace std;
 
-// PLACE YOUR NAME HERE
+// Jeevan Shergill
 
 void normalizeMoney(float& dollars, int cents = 150);
 // This function takes cents as an integer and converts it to dollars
@@ -16,50 +16,38 @@ int main()
 
 	cout << setprecision(2) << fixed << showpoint;
 
-	cents = 95;
 	cout << "\n We will now add 95 cents to our dollar total\n";
 
-	//	Fill in the code to call normalizeMoney to add 95 cents
+	cents = 95;
+
+	normalizeMoney(dollars, cents);
 
 	cout << "Converting cents to dollars resulted in " << dollars << " dollars\n";
 
 	cout << "\n We will now add 193 cents to our dollar total\n";
 
-	// Fill in the code to call normalizeMoney to add 193 cents
+	cents = 193;
+	normalizeMoney(dollars, cents);
 
 	cout << "Converting cents to dollars resulted in " << dollars << " dollars\n";
 
 	cout << "\n We will now add the default value to our dollar total\n";
 
-	// Fill in the code to call normalizeMoney to add the default value of cents
+	normalizeMoney(dollars);
 
 	cout << "Converting cents to dollars resulted in " << dollars << " dollars\n";
 
 	return 0;
 }
 
-//*******************************************************************************
-//	normalizeMoney
-//
-//	task:	  This function is given a value in cents. It will convert cents
-//	          to dollars and cents which is stored in a local variable called
-//	          total which is sent back to the calling function through the
-//	          parameter dollars. It will keep a running total of all the money
-//	          processed in a local static variable called sum.
-//
-//	data in:  cents which is an integer
-//	data out: dollars (which alters the corresponding actual parameter)
-//
-//*********************************************************************************
 
 void normalizeMoney(float& dollars, int cents)
 {
-	float total = 0;
+	static float total;
+	static float sum;
 
-	// Fill in the definition of sum as a static local variable
-	sum = 0.0;
 
-	// Fill in the code to convert cents to dollars
+	dollars = float(cents) / 100;
 
 	total = total + dollars;
 	sum = sum + dollars;
