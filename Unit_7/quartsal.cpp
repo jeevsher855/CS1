@@ -2,7 +2,7 @@
 // of years. It will print the year and transactions in a table format.
 // It will calculate year and quarter total transactions.
 
-// PLACE YOUR NAME HERE
+// Jeevan Shergill
 
 #include <iostream>
 #include <iomanip>
@@ -42,9 +42,9 @@ void printTableHeading()
 {
 	cout << setw(30) << "YEARLY QUARTERLY SALES" << endl << endl << endl;
 
-	cout << setw(10) << "YEAR" << setw(10) << "Quarter 1"
-		 << setw(10) << "Quarter 2" << setw(10) << "Quarter 3"
-		 << setw(10) << "Quarter 4" << endl;
+	cout << setw(10) << "YEAR" << setw(12) << "Quarter 1"
+		 << setw(12) << "Quarter 2" << setw(12) << "Quarter 3"
+		 << setw(12) << "Quarter 4" << endl;
 }
 
 //*****************************************************************************
@@ -64,19 +64,31 @@ void getSales(SalesType	table, int&	numOfYears)
 	cout << "Please input the number of years (1-" << MAXYEAR << ")" << endl;
 	cin >> numOfYears;
 
-	// Fill in the code to read and store the next value
+
+	for (int row = 0; row < numOfYears; row++)
+	{
+		table[row][0] = 2000 + row;
+		for (int col = 1; col < MAXCOL; col++)
+		{
+			cout << "Please input the number of sales per quarter" << endl;
+			cin >> table[row][col];
+		}
+	}
+
 }
 
-//*****************************************************************************
-//	printSales
-//
-//	task:	  This procedure prints out the information in the array
-//	data in:  an array containing sales information
-//	data out: none
-//
-//*****************************************************************************
 
 void printSales(SalesType table, int numOfYears)
 {
-	// Fill in the code to print the table
+	cout << fixed << showpoint << setprecision(2);
+
+	for (int row = 0; row < numOfYears; row++)
+	{
+		cout << setw(10) << table[row][0];
+		for (int col = 1; col < MAXCOL; col++)
+		{
+			cout << setw(12) << table[row][col];
+		}
+		cout << endl;
+	}
 }

@@ -1,7 +1,7 @@
 // This program will read in prices and store them into a two-dimensional array.
 // It will print those prices in a table form.
 
-// PLACE YOUR NAME HERE
+// Jeevan Shergill
 
 #include <iostream>
 #include <iomanip>
@@ -15,6 +15,8 @@ typedef float PriceType[MAXROWS][MAXCOLS];	// creates a new data type
 
 void getPrices(PriceType, int&, int&);		// gets the prices into the array 
 void printPrices(PriceType, int, int);		// prints data as a table
+float findHighestPrice(PriceType,int, int);
+float findLowestPrice(PriceType,int, int);
 
 int main()
 {
@@ -24,7 +26,8 @@ int main()
 
 	getPrices(priceTable, rowsUsed, colsUsed);		// calls getPrices to fill the array 
 	printPrices(priceTable, rowsUsed, colsUsed);	// calls printPrices to display array
-
+	cout << "The highest price in the table is $" << findHighestPrice(priceTable, rowsUsed, colsUsed) << endl;
+	cout << "The lowest price in the table is $" << findLowestPrice(priceTable, rowsUsed, colsUsed) << endl;
 	return 0;
 }
 
@@ -53,6 +56,8 @@ void getPrices(PriceType table, int& numOfRows, int& numOfCols)
 		for (int col = 0; col < numOfCols; col++)
 		{
 			// Fill in the code to read and store the next value in the array
+			cout << "Please input the price of an item with 2 decimal places" << endl;
+			cin >> table[row][col];
 		}
 	}
 }
@@ -75,7 +80,32 @@ void printPrices(PriceType table, int numOfRows, int numOfCols)
 	{
 		for (int col = 0; col < numOfCols; col++)
 		{
-			// Fill in the code to print the table
+			cout << setw(12) << table[row][col];
 		}
+		cout << endl;
 	}
+}
+
+float findHighestPrice(PriceType table, int numOfRows, int numOfCols)
+{
+	float highestPrice;
+
+	highestPrice = table[0][0];
+	for (int row = 0; row < numOfRows; row++)
+		for (int col = 0; col < numOfCols; col++)
+			if (highestPrice < table[row][col])
+				highestPrice = table[row][col];
+
+	return highestPrice;
+}
+float findLowestPrice(PriceType table, int numOfRows, int numOfCols) {
+	float lowestPrice;
+
+	lowestPrice = table[0][0];
+	for (int row = 0; row < numOfRows; row++)
+		for (int col = 0; col < numOfCols; col++)
+			if (lowestPrice > table[row][col])
+				lowestPrice = table[row][col];
+
+	return lowestPrice;
 }

@@ -40,6 +40,7 @@ int main()
 	int grade;
 
 
+
 	while (pos < 100 && dataIn >> grade)
 	{
 		pos++;
@@ -49,7 +50,7 @@ int main()
 
 
 
-	numberOfGrades = pos;
+	numberOfGrades = pos + 1;
 
 	avgOfGrades = findAverage(grades, numberOfGrades);
 
@@ -100,7 +101,6 @@ int	findLowest(const GradeType array, int size)
 	{
 		if (array[pos] < low)
 			low = array[pos];
-
 	}
 
 	return low;
