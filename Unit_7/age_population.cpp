@@ -10,6 +10,7 @@ using namespace std;
 const int TOTALYEARS = 100;
 
 
+
 int main()
 {
     int ageFrequency[TOTALYEARS];
