@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-// PLACE YOUR NAME HERE 
+// Jeevan Shergill
 
 const int MAXNAME = 20;
 
@@ -11,7 +11,7 @@ int main()
 	ifstream inData;
 	inData.open("grades.txt");
 
-	char name[MAXNAME + 1];	// holds student name 
+	char name[MAXNAME + 1];	// holds student name
 	float average;			// holds student average
 
 	inData.get(name, MAXNAME + 1);
@@ -19,13 +19,12 @@ int main()
 	while (inData)
 	{
 		inData >> average;
+		cout << name << "has a(n) " << average << " average ";
+		cout << name << average << endl;
+		inData.ignore(2, '\n');
 
-		// Fill in the code to print out name and
-		// student average
+		inData.get(name, MAXNAME + 1);
 
-		// Fill in the code to complete the while
-		// loop so that the rest of the student
-		// names and average are read in properly
 	}
 
 	return 0;
