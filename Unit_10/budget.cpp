@@ -1,10 +1,10 @@
 // This program reads in from the keyboard a record of financial information
-// consisting of a person’s name, income, rent, food costs, utilities and
+// consisting of a personï¿½s name, income, rent, food costs, utilities and
 // miscellaneous expenses. It then determines the net money
 // (income minus all expenses)and places that information in a record
 // which is then written to an output file.
 
-// PLACE YOUR NAME HERE
+// Jeevan Shergill
 
 #include <fstream>
 #include <iostream>
@@ -24,54 +24,81 @@ struct	budget	// declare a structure to hold name and financial information
 	float net;			// person's net money after bills are paid
 };
 
+void getText(budget&, char&);
+
+
+
 int main()
 {
 	fstream indata;
 	ofstream outdata;	// output file of
-						// student. 
+						// student.
+	char userinput = 'Y';
 
-	indata.open("income.dat", ios::out | ios::binary);	// open file as binary
-														// output.
+	indata.open("income.dat", ios::out | ios::binary | ios::app);	// open file as binary
 
 	outdata.open("student.out");	// output file that we
 									// will write student
 									// information to. 
 
 	outdata << left << fixed << setprecision(2);	// left indicates left
-													// justified for fields 
-
+													// justified for fields
 	budget person;	// defines person to be a record
-
-	cout << "Enter the following information" << endl;
-
-	cout << "Person's name: ";
-	cin.getline(person.name, NAMESIZE);
-
-	cout << "Income :";
-	cin >> person.income;
-
-	// FILL IN CODE TO READ IN THE REST OF THE FIELDS:
-	// rent, food, utilities AND miscell TO THE person RECORD
-
-	// find the net field
-	person.net = // FILL IN CODE TO DETERMINE NET INCOME (income - expenses)
-
-	// write this record to the file
-	// Fill IN CODE TO WRITE THE RECORD TO THE FILE indata (one instruction)
-
-	indata.close();
-
-	// FILL IN THE CODE TO REOPEN THE indata FILE, NOW AS AN INPUT FILE.
-
-	// FILL IN THE CODE TO READ THE RECORD FROM indata AND PLACE IT IN THE
-
-	// write information to output file
 	outdata << setw(20) << "Name" << setw(10) << "Income" << setw(10) << "Rent"
 		    << setw(10) << "Food" << setw(15) << "Utilities" << setw(15)
 		    << "Miscellaneous" << setw(10) << "Net Money" << endl << endl;
 
-	// FILL IN CODE TO WRITE INDIVIDUAL FIELD INFORMATION OF THE RECORD TO
-	// THE outdata FILE.(several instructions)
+
+
+
+
+	while (userinput == 'Y' || userinput == 'y')
+	{
+
+		getText(person, userinput);
+		cin.ignore(2, '\n');
+		person.net = person.income - (person.rent + person.food + person.utilities + person.miscell);
+
+
+		indata.write(reinterpret_cast<char*>(&person), sizeof(person));
+
+		indata.open("income.dat", ios::in | ios::binary | ios::app);
+
+		indata.read(reinterpret_cast<char*>(&person), sizeof(person));
+
+		outdata << setw(20) << person.name
+		<< setw(10) << person.income
+		<< setw(15) << person.rent
+		<< setw(10) << person.food
+		<< setw(15) << person.utilities
+		<< setw(10) << person.miscell
+		<< setw(15) << person.net << endl;
+
+
+	}
+
+	indata.close();
+	outdata.close();
 
 	return 0;
+}
+void getText(budget& person, char& userinput)
+{
+	cout << "Enter the following information" << endl;
+	cout << "Person's name: ";
+	cin.getline(person.name, NAMESIZE);
+	cout << "Income: ";
+	cin >> person.income;
+	cout << "Rent: ";
+	cin >> person.rent;
+	cout << "Food: ";
+	cin >> person.food;
+	cout << "Utilities: ";
+	cin >> person.utilities;
+	cout << "Miscellaneous: ";
+	cin >> person.miscell;
+
+	cout << "Would you like to continue?: " ;
+	cin >> userinput;
+
 }

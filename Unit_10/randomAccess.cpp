@@ -3,7 +3,7 @@
 #include <cctype>
 using namespace std;
 
-// PLACE YOUR NAME HERE
+// Jeevan Shergill
 
 int main()
 {
@@ -17,10 +17,11 @@ int main()
 		// Fill in the code to write to the screen
 		// the current read position (with label)
 
+
 		cout << "Enter an offset from the current read position: ";
 		cin >> offset;
 
-		//	Fill in the code to move the read position “offset” bytes
+		//	Fill in the code to move the read position ï¿½offsetï¿½ bytes
 		//	from the CURRENT read position.
 
 		//	Fill in the code to get one byte of information from the file

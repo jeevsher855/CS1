@@ -1,13 +1,13 @@
-#include // FILL IN DIRECTIVE FOR FILES
+#include <fstream>// FILL IN DIRECTIVE FOR FILES
 #include <iostream>
 #include <iomanip>
 using namespace std;
 
 // This program reads records from a file. The file contains the
-// following: student’s name, two test grades and final exam grade.
+// following: studentï¿½s name, two test grades and final exam grade.
 // It then prints this information to the screen.
 
-// PLACE YOUR NAME HERE
+// Jeevan Shergill
 
 const int NAMESIZE = 15;
 const int MAXRECORDS = 50;
@@ -18,6 +18,7 @@ struct Grades	// declares a structure
 	int test1;
 	int test2;
 	int final;
+	char letter;
 };
 
 typedef Grades gradeType[MAXRECORDS];
@@ -25,18 +26,16 @@ typedef Grades gradeType[MAXRECORDS];
 // that holds MAXRECORDS
 // Grades structures.
 
-// FIll IN THE CODE FOR THE PROTOTYPE OF THE FUNCTION ReadIt
-// WHERE THE FIRST ARGUMENT IS AN INPUT FILE, THE SECOND IS THE
-// ARRAY OF RECORDS, AND THE THIRD WILL HOLD THE NUMBER OF RECORDS
-// CURRENTLY IN THE ARRAY.
-
+void readIt(ifstream&, gradeType, int&);
+char int_to_char(int);
 int main()
 {
 	ifstream indata;
 
 	indata.open("graderoll.dat");
 
-	int numRecord;	// number of records read in 
+	int numRecord;	// number of records read in
+	int grades;
 
 	gradeType studentRecord;
 
@@ -48,7 +47,8 @@ int main()
 		return 1;
 	}
 
-	// FILL IN THE CODE TO CALL THE FUNCTION ReadIt.
+
+	readIt(indata, studentRecord, numRecord);
 
 	// output the information
 	for (int count = 0; count < numRecord; count++)
@@ -56,7 +56,10 @@ int main()
 		cout << studentRecord[count].name << setw(10)
 			 << studentRecord[count].test1
 			 << setw(10) << studentRecord[count].test2;
-		cout << setw(10) << studentRecord[count].final << endl;
+		cout << setw(10) << studentRecord[count].final;
+		grades = (0.3 * (studentRecord[count].test1 + studentRecord[count].test2) / 2 + 0.4 * studentRecord[count].final) / 0.7;
+		studentRecord[count].letter = int_to_char(grades);
+		cout << setw(10) << studentRecord[count].letter << endl;
 	}
 
 	return 0;
@@ -74,10 +77,7 @@ int main()
 //
 //**************************************************************
 
-void readIt(// FILL IN THE CODE FOR THE FORMAL PARAMETERS AND THEIR
-	        // DATA	TYPES.
-	        // inData, gradeRec and total are the formal parameters
-	        // total is passed by reference)
+void readIt(ifstream& inData, gradeType gradeRec, int& total)
 {
 	total = 0;
 
@@ -85,17 +85,33 @@ void readIt(// FILL IN THE CODE FOR THE FORMAL PARAMETERS AND THEIR
 
 	while (inData)
 	{
-		// FILL IN THE CODE TO READ test1
+		inData >> gradeRec[total].test1;
 
-		// FILL IN THE CODE TO READ test2
+		inData >> gradeRec[total].test2;
 
-		// FILL IN THE CODE TO READ final
-
-		total++;	// add one to total
+		inData >> gradeRec[total].final;
+		total++;
 
 		// FILL IN THE CODE TO CONSUME THE END OF LINE
-
+		inData.ignore(100, '\n');
 		// FILL IN THE CODE TO READ name
+		inData.get(gradeRec[total].name, NAMESIZE);
+		// first parameter is where the data goes
+		// second is amount of characters read
+
 	}
 
+}
+char int_to_char(int average)
+{
+	if (average >= 90 && average <= 100)
+		return 'A';
+	else if (average >= 80 && average < 90)
+		return 'B';
+	else if (average >= 70 && average < 80)
+		return 'C';
+	else if (average >= 60 && average < 70)
+		return 'D';
+	else
+		return 'F';
 }
