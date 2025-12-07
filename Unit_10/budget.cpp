@@ -62,6 +62,8 @@ int main()
 
 		indata.write(reinterpret_cast<char*>(&person), sizeof(person));
 
+		indata.close();
+
 		indata.open("income.dat", ios::in | ios::binary | ios::app);
 
 		indata.read(reinterpret_cast<char*>(&person), sizeof(person));
