@@ -7,4 +7,5 @@ add_executable(ASCII_Table_Demonstration main.cpp
         ascii_part1.cpp
         ascii_part2.cpp
         ascii_table_function.cpp
-        ASCII_Data_Structure.cpp)
+        ASCII_Data_Structure.cpp
+        ASCII_Binary.cpp)
