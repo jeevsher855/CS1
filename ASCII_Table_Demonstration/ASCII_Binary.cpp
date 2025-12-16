@@ -11,49 +11,42 @@ struct ASCII {
     int number;
     char letter;
 };
-void calcASCII(ASCII [], char, char, int&);
-void print(ASCII [], int, fstream& file);
+void calcASCII(char, char, fstream&);
+void print(fstream& file);
 
 int main() {
-    const int SIZE = 62;
-    ASCII a[SIZE];
-    int pos = 0;
 
     fstream ASCIIfile ("ASCII.dat", ios::out | ios::binary);
 
-    calcASCII (a, '0', '9', pos);
-    calcASCII (a, 'A', 'Z', pos);
-    calcASCII (a, 'a', 'z', pos);
+    calcASCII ('0', '9', ASCIIfile);
+    calcASCII ('A', 'Z', ASCIIfile);
+    calcASCII ('a', 'z', ASCIIfile);
 
-    print(a, pos, ASCIIfile);
+    print(ASCIIfile);
     return 0;
 }
 
-void calcASCII(ASCII array[], char start, char end, int& pos) {
+void calcASCII(char start, char end, fstream& ASC_file) {
     char ch;
+    ASCII temp_in;
     for (ch = start; ch <= end; ch++) {
-        array[pos].letter = ch;
-        array[pos].number = int(ch);
-        pos++;
+        temp_in.letter = ch;
+        temp_in.number = int(ch);
+        ASC_file.write(reinterpret_cast<char*>(&temp_in), sizeof(temp_in));
     }
 }
 
-void print(ASCII array[], int pos, fstream& file) {
+void print(fstream& file) {
 
     ASCII temp;
 
     cout << "Character" << setw(15) << "ASCII Table\n";
     cout << "-----------------------\n";
 
-    for (int count = 0; count < pos; count++)
-        file.write(reinterpret_cast<char*>(&array[count]), sizeof(array));
-
     file.close();
     file.open("ASCII.dat", ios::in | ios::binary);
 
     while (file.read(reinterpret_cast<char*>(&temp), sizeof(temp)))
-    {
         cout << temp.letter << setw(17) << temp.number << endl;
-    }
-
+    file.close();
 }
