@@ -14,7 +14,7 @@ struct ASCII
 };
 
 void calc(char, char, fstream&);
-void print();
+void print(fstream&);
 
 int main()
 {
@@ -25,7 +25,7 @@ int main()
     calc('a', 'z', file);
 
 
-    print();
+    print(file);
 
     return 0;
 
@@ -34,25 +34,23 @@ int main()
 void calc(char start, char end, fstream& file)
 {
     ASCII temp_in;
-    file.close();
-    file.open("sigma.dat", ios::out | ios::binary | ios::app);
-    for (;start <= end; start++)
+    for (; start <= end; start++)
     {
         temp_in.value = start;
         temp_in.number = int(start);
         file.write(reinterpret_cast<char*>(&temp_in), sizeof(temp_in));
     }
-    file.close();
 }
 
-void print()
+void print(fstream& file)
 {
     ASCII temp_out;
-    ifstream infile ("sigma.dat", ios::binary);
-    while (infile.read(reinterpret_cast<char*>(&temp_out), sizeof(temp_out)))
+    file.close();
+    file.open("sigma.dat", ios::in | ios::binary);
+    while (file.read(reinterpret_cast<char*>(&temp_out), sizeof(temp_out)))
     {
         cout << temp_out.value << setw(15) << temp_out.number << endl;
     }
 
-    infile.close();
+    file.close();
 }
